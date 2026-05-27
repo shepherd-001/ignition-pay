@@ -10,6 +10,20 @@
 
 **Stellar Address Kit** is a specialized, multi-language library designed to solve the complexity of deposit routing on the Stellar network. It provides a unified, spec-compliant way to handle G-addresses (classic), M-addresses (muxed), and C-addresses (contracts) across TypeScript, Go, and Dart.
 
+## Use Cases
+
+- **Exchange Deposit Reconciliation**: Reliably identify incoming payments, correctly extracting the routing ID whether it arrives via a Muxed address or a standard Memo, while automatically flagging non-canonical formatting.
+- **Wallet Address Input Forms**: Prevent users from making mistakes (like sending payments to a Contract address or entering a Memo alongside an M-address) with real-time UI warnings.
+- **Compliance & Security Firewalls**: Automatically quarantine deposits from contract-senders or invalid destinations before they affect user balances.
+- **Cross-Platform Parity**: Ensure identical deposit routing behavior whether your backend is written in Go, your frontend in TypeScript, or your mobile app in Flutter.
+
+## Core Features
+
+- **Spec-First Design**: Guaranteed identical behavior across all three languages via a shared test vector suite.
+- **Precision Safety**: Built-in protection against 64-bit integer precision loss in JavaScript and Flutter Web.
+- **Warning System**: Discriminated unions (TS) or structured objects (Go/Dart) to catch edge cases like numeric `MEMO_TEXT`.
+- **Zero Dependencies**: Core logic is lightweight and has zero external dependencies beyond standard library features.
+
 ## Documentation
 
 For full technical specifications, architecture deep-dives, and API references, visit our [Live Documentation](https://stellaraddresskit.mintlify.app/docs/introduction).
