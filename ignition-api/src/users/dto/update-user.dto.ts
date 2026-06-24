@@ -1,4 +1,12 @@
-import { IsString, IsOptional, MaxLength, IsEmail } from 'class-validator';
+import {
+  IsString,
+  IsOptional,
+  MaxLength,
+  MinLength,
+  IsEmail,
+  IsUrl,
+  Matches,
+} from 'class-validator';
 
 export class UpdateUserDto {
   @IsOptional()
@@ -7,19 +15,25 @@ export class UpdateUserDto {
 
   @IsOptional()
   @IsString()
+  @MinLength(1)
   @MaxLength(100)
   name?: string;
 
   @IsOptional()
   @IsString()
   @MaxLength(50)
+  @Matches(/^\+?[1-9]\d{1,14}$/, {
+    message: 'phone must be a valid E.164 format',
+  })
   phone?: string;
 
   @IsOptional()
   @IsString()
   preferences?: string; // JSON stringified object
+
   @IsOptional()
   @IsString()
+  @MinLength(1)
   @MaxLength(100)
   displayName?: string;
 
@@ -30,6 +44,7 @@ export class UpdateUserDto {
 
   @IsOptional()
   @IsString()
+  @IsUrl({ require_protocol: true, protocols: ['https'] })
   avatarUrl?: string;
 
   @IsOptional()

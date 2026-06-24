@@ -18,8 +18,8 @@ export class AdminGuard implements CanActivate {
       throw new ForbiddenException('User not authenticated');
     }
 
-    const dbUser = await this.prisma.user.findUnique({
-      where: { walletAddress: user.walletAddress },
+    const dbUser = await this.prisma.user.findFirst({
+      where: { walletAddress: user.walletAddress, deletedAt: null },
     });
 
     if (!dbUser || dbUser.role !== 'ADMIN') {

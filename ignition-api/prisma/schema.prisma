@@ -97,25 +97,27 @@ enum KYCStatus {
 
 /// User model representing donors, creators, and administrators
 model User {
-  id            String    @id @default(uuid())
-  walletAddress String    @unique
-  email         String?   @unique
-  displayName   String?
-  name          String?
-  phone         String?
-  preferences   Json?
-  role          UserRole  @default(USER)
-  kycStatus     KycStatus @default(UNVERIFIED)
-  bio           String?
-  avatarUrl     String?
-  socialLinks   Json?
-  verifiedStatus Boolean  @default(false)
-  passwordHash  String?
-  loginAttempts Int       @default(0)
-  lockedUntil   DateTime?
-  isActive      Boolean   @default(true)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id               String    @id @default(uuid())
+  walletAddress    String?   @unique
+  email            String?   @unique
+  passwordHash     String?
+  displayName      String?
+  name             String?
+  phone            String?
+  bio              String?
+  avatarUrl        String?
+  preferences      Json?
+  socialLinks      Json?
+  role             UserRole  @default(USER)
+  kycStatus        KycStatus @default(UNVERIFIED)
+  emailVerifiedAt  DateTime?
+  verifiedStatus   Boolean   @default(false)
+  loginAttempts    Int       @default(0)
+  lockedUntil      DateTime?
+  isActive         Boolean   @default(true)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  deletedAt        DateTime?
 
   // Relations
   campaigns     Campaign[]     @relation("CampaignCreator")
@@ -132,6 +134,7 @@ model User {
   @@index([role])
   @@index([isActive])
   @@index([kycStatus])
+  @@index([deletedAt])
   @@map("users")
 }
 

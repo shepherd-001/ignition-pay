@@ -39,12 +39,12 @@ export class RolesGuard implements CanActivate {
 
     let dbUser;
     if (userId) {
-      dbUser = await this.prisma.user.findUnique({
-        where: { id: userId },
+      dbUser = await this.prisma.user.findFirst({
+        where: { id: userId, deletedAt: null },
       });
     } else if (walletAddress) {
-      dbUser = await this.prisma.user.findUnique({
-        where: { walletAddress },
+      dbUser = await this.prisma.user.findFirst({
+        where: { walletAddress, deletedAt: null },
       });
     }
 

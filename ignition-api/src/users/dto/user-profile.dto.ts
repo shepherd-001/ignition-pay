@@ -1,14 +1,17 @@
 export class UserProfileDto {
   id: string;
-  walletAddress: string;
+  email?: string;
   displayName?: string;
+  name?: string;
+  phone?: string;
   bio?: string;
   avatarUrl?: string;
   role: string;
   kycStatus: string;
-  verifiedStatus: boolean;
+  emailVerifiedAt?: Date;
   createdAt: Date;
   updatedAt: Date;
+  deletedAt?: Date;
 
   // Stats
   totalRaised?: number;
